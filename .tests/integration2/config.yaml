@@ -1,0 +1,28 @@
+samples: "/beegfs-storage/data/test_data/gms560/samples.tsv"
+units: "/beegfs-storage/data/test_data/gms560/units.tsv"
+resources: "/beegfs-storage/data/test_data/gms560/resources.yaml"
+
+reference:
+  fasta: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta"
+  dict: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.dict"
+  fna: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta"
+  amb: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta.amb"
+  ann: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta.ann"
+  bwt: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta.bwt"
+  fai: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta.fai"
+  pac: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta.pac"
+  sa: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta.sa"
+
+default_container: "docker://hydragenetics/common:0.0.1"
+bwa_mem:
+  container: "docker://hydragenetics/bwa_mem:0.7.17"
+  extra: "-R '@RG\\tID:{sample}\\tSM:{sample}\\tPL:illumina\\tPU:{sample}' -v 1 "
+
+mark_duplicates:
+  container: "hydragenetics/picard:2.25.0"
+
+samtools_index:
+  container: "docker://hydragenetics/common:0.0.1"
+
+merge_bam:
+  container: "docker://hydragenetics/common:0.0.1"
